@@ -93,29 +93,6 @@ void game() {
 			snake_next = {snake[0].first - 1, snake[0].second};
 		}
 
-		//check for apple
-		if (snake[0] == apple) {
-			growth_counter = 2;
-			++score;
-			apple_eaten = true;
-			if (score % 10 == 0) update_interval -= cycle_interval;
-		}
-
-		//check for walls
-		if (snake[0].first > d.first || snake[0].first < 0 || 
-		snake[0].second > d.second || snake[0].second < 0) snake_alive = false;
-
-		//check for snake eating snake
-		for (int i = 1; i < snake.size(); ++i) {
-			if (snake[i] == snake[0]) snake_alive = false;
-		}
-
-		//if apple is eaten, pop it up somewhere random
-		if (apple_eaten) {
-			apple_eaten = false;
-			apple = randomLocation(d);
-		}
-
 		if (update_time >= update_interval) {
 			update_time = 0;
 
@@ -142,6 +119,29 @@ void game() {
 			if (growth_counter > 0) {
 				--growth_counter; snake.push_back(new_segment);
 			}
+		}
+
+		//check for apple
+		if (snake[0] == apple) {
+			growth_counter = 2;
+			++score;
+			apple_eaten = true;
+			if (score % 10 == 0) update_interval -= cycle_interval;
+		}
+
+		//check for walls
+		if (snake[0].first > d.first || snake[0].first < 0 || 
+		snake[0].second > d.second || snake[0].second < 0) snake_alive = false;
+
+		//check for snake eating snake
+		for (int i = 1; i < snake.size(); ++i) {
+			if (snake[i] == snake[0]) snake_alive = false;
+		}
+
+		//if apple is eaten, pop it up somewhere random
+		if (apple_eaten) {
+			apple_eaten = false;
+			apple = randomLocation(d);
 		}
 
 		//setting the display
