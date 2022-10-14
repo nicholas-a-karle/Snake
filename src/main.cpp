@@ -107,6 +107,10 @@ void game() {
 		if (snake[0].first > d.first || snake[0].first < 0 || 
 		snake[0].second > d.second || snake[0].second < 0) snake_alive = false;
 
+		//check for snake eating snake
+		for (int i = 0; i < snake.size(); ++i) for (int k = 0; k < snake.size(); ++k)
+			if (snake[i] == snake[k]) snake_alive = false;
+
 		//if apple is eaten, pop it up somewhere random
 		if (apple_eaten) {
 			apple_eaten = false;
