@@ -31,7 +31,7 @@ void game() {
 	vector<vector<char>> display;
 	int score = 0;
 	int growth_counter = 0;
-	pair<int, int> d = {40, 20};
+	pair<int, int> d = {20, 40};
 	pair<int, int> apple = randomLocation(d);
 	bool snake_alive = true;
 	bool apple_eaten = false;
@@ -46,8 +46,8 @@ void game() {
 	const char snake_sym = 'D';
 	const char apple_sym = 'O';
 
-	for (int i = 0; i < d.second; ++i) {
-		display.push_back(vector<char>(d.first, blank));
+	for (int i = 0; i < d.first; ++i) {
+		display.push_back(vector<char>(d.second, blank));
 	}
 
 	int update_interval = 300; //about 3 every second
@@ -100,7 +100,7 @@ void game() {
 			growth_counter = 2;
 			++score;
 			apple_eaten = true;
-			//if (score % 10 == 0) update_interval -= cycle_interval;
+			if (score % 10 == 0) update_interval -= cycle_interval;
 		}
 
 		//check for walls
@@ -152,7 +152,7 @@ void game() {
 
 			display[apple.first][apple.second] = apple_sym;
 
-			for (int i = 0; i < snake.size(); ++i) {
+			for (int i = 0; i < snake.size(); ++i) { 
 				display[snake[i].first][snake[i].second] = snake_sym;
 			}
 		} else {
@@ -165,6 +165,7 @@ void game() {
 		
 
 		print_display(display);
+		cout << endl;
 		cout << "SCORE: " << score << endl;
 		if (!snake_alive) break;
 
