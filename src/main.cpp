@@ -58,9 +58,7 @@ void game() {
 	short msb_short = 1 << (sizeof(short) * 8 - 1);
 
 	cout << "Press Space to begin..." << endl;
-	while (true) {
-		if (GetAsyncKeyState(VK_SPACE) & msb_short) break;
-	}
+	while (true) if (GetAsyncKeyState(VK_SPACE) & msb_short) break;
 
 	while (snake_alive) {
 		//snake has "fake" head which turns when key is pressed at cycle start
@@ -108,8 +106,9 @@ void game() {
 		snake[0].second > d.second || snake[0].second < 0) snake_alive = false;
 
 		//check for snake eating snake
-		for (int i = 0; i < snake.size(); ++i) for (int k = 0; k < snake.size(); ++k)
-			if (snake[i] == snake[k]) snake_alive = false;
+		for (int i = 1; i < snake.size(); ++i) {
+			if (snake[i] == snake[0]) snake_alive = false;
+		}
 
 		//if apple is eaten, pop it up somewhere random
 		if (apple_eaten) {
