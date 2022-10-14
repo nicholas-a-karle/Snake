@@ -145,27 +145,18 @@ void game() {
 		}
 
 		//setting the display
-		if (snake_alive) {
-			//clear display
-			for (int i = 0; i < display.size(); ++i) {
-				for (int k = 0; k < display[i].size(); ++k) {
-					display[i][k] = blank;
-				}
-			}
-
-			display[apple.first][apple.second] = apple_sym;
-
-			for (int i = 0; i < snake.size(); ++i) { 
-				display[snake[i].first][snake[i].second] = snake_sym;
-			}
-		} else {
-			for (int i = 0; i < display.size(); ++i) {
-				for (int k = 0; k < display[i].size(); ++k) {
-					display[i][k] = blank;
-				}
+		//clear display
+		for (int i = 0; i < display.size(); ++i) {
+			for (int k = 0; k < display[i].size(); ++k) {
+				display[i][k] = blank;
 			}
 		}
-		
+
+		display[apple.first][apple.second] = apple_sym;
+
+		for (int i = 0; i < snake.size(); ++i) { 
+			display[snake[i].first][snake[i].second] = snake_sym;
+		}
 
 		print_display(display);
 		cout << endl;
